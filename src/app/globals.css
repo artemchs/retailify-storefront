@@ -52,14 +52,11 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: var(--font-inter);
   }
 
   body {
     @apply bg-zinc-50 text-foreground;
-  }
-
-  html {
-    font-family: var(--font-inter);
   }
 
   h1 {

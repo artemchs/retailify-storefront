@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 
+import NavigationBar from "@/components/navigation/NavigationBar";
+
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
@@ -27,6 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${montserrat.variable}`}>
+        <div className="sticky top-0">
+          <NavigationBar />
+        </div>
         {children}
       </body>
     </html>
