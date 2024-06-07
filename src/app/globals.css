@@ -55,6 +55,89 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-zinc-50 text-foreground;
+  }
+
+  html {
+    font-family: var(--font-inter);
+  }
+
+  h1 {
+    font-family: var(--font-montserrat);
+    @apply text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  p {
+    @apply leading-7 text-pretty;
+  }
+
+  blockquote {
+    @apply border-l-2 pl-6 italic;
+  }
+
+  table {
+    @apply w-full border-collapse;
+  }
+
+  thead tr {
+    @apply m-0 border-t p-0 even:bg-muted;
+  }
+
+  th {
+    @apply border px-4 py-2 text-left font-bold;
+  }
+
+  tbody tr {
+    @apply m-0 border-t p-0 even:bg-muted;
+  }
+
+  td {
+    @apply border px-4 py-2 text-left;
+  }
+
+  th[align="center"],
+  td[align="center"] {
+    @apply text-center;
+  }
+
+  th[align="right"],
+  td[align="right"] {
+    @apply text-right;
+  }
+
+  ul {
+    @apply list-disc [&>li]:mt-2;
+  }
+
+  code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+
+  .typography-lead {
+    @apply text-xl text-muted-foreground;
+  }
+
+  .typography-large {
+    @apply text-lg font-semibold;
+  }
+
+  .typography-small {
+    @apply text-sm font-medium leading-none;
+  }
+
+  .typography-muted {
+    @apply text-sm text-muted-foreground;
   }
 }
