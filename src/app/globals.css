@@ -52,7 +52,6 @@
 @layer base {
   * {
     @apply border-border;
-    font-family: var(--font-inter);
   }
 
   body {
@@ -60,7 +59,6 @@
   }
 
   h1 {
-    font-family: var(--font-montserrat);
     @apply text-4xl font-extrabold tracking-tight lg:text-5xl;
   }
 

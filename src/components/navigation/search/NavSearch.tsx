@@ -7,7 +7,7 @@ import MobileNavSearchDrawer from "./MobileNavSearchDrawer";
 import DesktopNavSearchCommand from "./DesktopNavSearchCommand";
 
 export default function NavSearch() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [open, setOpen] = useState(false);
 
   return (

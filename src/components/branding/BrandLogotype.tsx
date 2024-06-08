@@ -1,10 +1,14 @@
 import BrandIcon from "./BrandIcon";
 import BrandName from "./BrandName";
 
-export default function BrandLogotype() {
+type Props = {
+  iconSize?: "sm" | "md" | "lg";
+};
+
+export default function BrandLogotype({ iconSize }: Props) {
   return (
     <div className="flex items-center gap-2">
-      <BrandIcon />
+      <BrandIcon size={iconSize ?? "sm"} />
       <div className="hidden lg:flex">
         <BrandName />
       </div>

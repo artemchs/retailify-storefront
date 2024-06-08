@@ -5,7 +5,7 @@ import { User2 } from "lucide-react";
 export default function ProfileNavLink() {
   return (
     <Button asChild size="icon" variant="ghost">
-      <Link href="/">
+      <Link href="/send-otp">
         <User2 className="h-6 w-6 shrink-0" />
       </Link>
     </Button>

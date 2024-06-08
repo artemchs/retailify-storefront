@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import NavigationBar from "@/components/navigation/NavigationBar";
@@ -7,13 +7,6 @@ import NavigationBar from "@/components/navigation/NavigationBar";
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-montserrat",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,11 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat.variable}`}>
-        <div className="sticky top-0">
-          <NavigationBar />
+      <body className={inter.className}>
+        <div className="flex flex-col min-h-[100dvh]">
+          <div className="sticky top-0">
+            <NavigationBar />
+          </div>
+          {children}
         </div>
-        {children}
       </body>
     </html>
   );
