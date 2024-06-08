@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import NavigationBar from "@/components/navigation/NavigationBar";
+import Providers from "./Providers";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -22,12 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex flex-col min-h-[100dvh]">
-          <div className="sticky top-0">
-            <NavigationBar />
+        <Providers>
+          <div className="flex flex-col min-h-[100dvh]">
+            <div className="sticky top-0">
+              <NavigationBar />
+            </div>
+            {children}
           </div>
-          {children}
-        </div>
+        </Providers>
       </body>
     </html>
   );
