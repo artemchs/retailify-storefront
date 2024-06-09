@@ -1,10 +1,12 @@
 import { SendOtpFormSchemaType } from "@/form-validation/auth/send-otp";
+import { SignUpFormSchema } from "@/form-validation/auth/sign-up";
 import { ValidateOtpFormSchema } from "@/form-validation/auth/validate-otp";
 import { useMutation } from "@tanstack/react-query";
 
 export const KEYS = {
   SEND_OTP: "send-otp",
   VALIDATE_OTP: "validate-otp",
+  SIGN_UP: "sign-up",
 };
 
 export const useSendOtp = ({ onSuccess, onError }: MutationProps) =>
@@ -68,6 +70,33 @@ export const useValidateOtp = ({ onSuccess, onError }: MutationProps) =>
       return resData as {
         firstTime: boolean;
       };
+    },
+    onSuccess,
+    onError,
+  });
+
+export const useSignUp = ({ onSuccess, onError }: MutationProps) =>
+  useMutation({
+    mutationKey: [KEYS.SIGN_UP],
+    mutationFn: async (data: SignUpFormSchema) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sign-up`,
+        {
+          method: "POST",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(
+          errorData.message ?? `Error ${res.status} - Something went wrong.`
+        );
+      }
     },
     onSuccess,
     onError,

@@ -22,17 +22,27 @@ import {
 } from "@/components/ui/input-otp";
 import { validateOtpFormSchema } from "@/form-validation/auth/validate-otp";
 import { useState } from "react";
-import { useSendOtp, useValidateOtp } from "@/api/services/auth";
+import { useValidateOtp } from "@/api/services/auth";
 import FormErrorAlert from "@/components/ui/form-error-alert";
 import SubmitButton from "@/components/ui/submit-button";
 import { Check } from "lucide-react";
 import SendOtpAgain from "./SendOtpAgain";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Props = {
   phoneNumber: string;
+  setStep?: (newValue: number) => void;
+  setValidatedOtp?: (newValue: string) => void;
 };
 
-export default function ValidateOtpForm({ phoneNumber }: Props) {
+export default function ValidateOtpForm({
+  phoneNumber,
+  setStep,
+  setValidatedOtp,
+}: Props) {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof validateOtpFormSchema>>({
     resolver: zodResolver(validateOtpFormSchema),
     defaultValues: {
@@ -44,15 +54,12 @@ export default function ValidateOtpForm({ phoneNumber }: Props) {
   const [errorMsg, setErrorMsg] = useState("");
   const { mutate, isPending, isError } = useValidateOtp({
     onSuccess: ({ firstTime }: { firstTime: boolean }) => {
-      //   toast.success("Ми щойно надіслали вам SMS із кодом підтвердження.");
-      //   if (setStep) {
-      //     setStep(2);
-      //   }
-      //   if (setPhoneNumber) {
-      //     setPhoneNumber(form.getValues("phoneNumber"));
-      //   }
       if (firstTime) {
-        console.log({ firstTime });
+        if (setStep) setStep(3);
+        if (setValidatedOtp) setValidatedOtp(form.getValues("otp"));
+      } else {
+        router.push("/");
+        toast.success("Ви успішно ввійшли у свій профіль.");
       }
     },
     onError: (e) => {

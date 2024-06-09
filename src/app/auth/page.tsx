@@ -4,6 +4,7 @@ import SendOtpHeader from "./components/send-otp/SendOtpHeader";
 import { AuthStepProvider } from "./components/AuthStepProvider";
 import AuthScreen from "./components/AuthScreen";
 import ValidateOtpHeader from "./components/validate-otp/ValidateOtpHeader";
+import SignUpHeader from "./components/sign-up/SignUpHeader";
 
 export const metadata: Metadata = {
   title: "Аутентифікація",
@@ -18,6 +19,7 @@ export default function Auth() {
           headerComponentsArray={[
             <SendOtpHeader key={1} />,
             <ValidateOtpHeader key={2} />,
+            <SignUpHeader key={3} />,
           ]}
         />
       </AuthStepProvider>

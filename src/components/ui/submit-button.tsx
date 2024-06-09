@@ -26,7 +26,10 @@ export default function SubmitButton({
     <Button
       disabled={isPending}
       type="submit"
-      className={cn("w-full flex items-center justify-center gap-2", className)}
+      className={cn(
+        "w-full mt-4 flex items-center justify-center gap-2",
+        className
+      )}
     >
       {icon}
       {text}
