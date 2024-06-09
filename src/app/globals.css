@@ -94,6 +94,10 @@
     @apply border px-4 py-2 text-left font-bold;
   }
 
+  form {
+    @apply flex flex-col gap-8;
+  }
+
   tbody tr {
     @apply m-0 border-t p-0 even:bg-muted;
   }
