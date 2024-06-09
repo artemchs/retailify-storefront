@@ -1,7 +1,9 @@
 import { BRAND_NAME } from "@/shop-config";
 import { Metadata } from "next";
 import SendOtpHeader from "./components/send-otp/SendOtpHeader";
-import SendOtpForm from "./components/send-otp/SendOtpForm";
+import { AuthStepProvider } from "./components/AuthStepProvider";
+import AuthScreen from "./components/AuthScreen";
+import ValidateOtpHeader from "./components/validate-otp/ValidateOtpHeader";
 
 export const metadata: Metadata = {
   title: "Аутентифікація",
@@ -11,10 +13,14 @@ export const metadata: Metadata = {
 export default function Auth() {
   return (
     <main className="container py-6 h-full flex-grow flex items-center justify-center">
-      <div className="max-w-sm flex flex-col gap-12">
-        <SendOtpHeader />
-        <SendOtpForm />
-      </div>
+      <AuthStepProvider>
+        <AuthScreen
+          headerComponentsArray={[
+            <SendOtpHeader key={1} />,
+            <ValidateOtpHeader key={2} />,
+          ]}
+        />
+      </AuthStepProvider>
     </main>
   );
 }

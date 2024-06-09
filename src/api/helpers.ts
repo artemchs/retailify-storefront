@@ -21,6 +21,6 @@
 // }
 
 type MutationProps = {
-  onSuccess: () => void;
+  onSuccess: (data?: any) => void;
   onError: (e: Error) => void;
 };

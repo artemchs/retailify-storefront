@@ -23,7 +23,12 @@ import FormErrorAlert from "@/components/ui/form-error-alert";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function SendOtpForm() {
+type Props = {
+  setStep?: (newValue: number) => void;
+  setPhoneNumber?: (newValue: string) => void;
+};
+
+export default function SendOtpForm({ setStep, setPhoneNumber }: Props) {
   const form = useForm<z.infer<typeof sendOtpFormSchema>>({
     resolver: zodResolver(sendOtpFormSchema),
     defaultValues: {
@@ -35,6 +40,12 @@ export default function SendOtpForm() {
   const { mutate, isPending, isError } = useSendOtp({
     onSuccess: () => {
       toast.success("Ми щойно надіслали вам SMS із кодом підтвердження.");
+      if (setStep) {
+        setStep(2);
+      }
+      if (setPhoneNumber) {
+        setPhoneNumber(form.getValues("phoneNumber"));
+      }
     },
     onError: (e) => {
       setErrorMsg(e.message);
