@@ -57,7 +57,10 @@ export default function SignUpForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} aria-labelledby="form-title">
+        <h2 id="form-title" className="sr-only">
+          Реєстраційна форма
+        </h2>
         <FormErrorAlert isError={isError} message={errorMsg} />
         <FormField
           control={form.control}

@@ -8,11 +8,17 @@ export default function ValidateOtpHeader() {
 
   return (
     <header className="flex flex-col gap-2">
-      <h3>Код підтвердження 🔑</h3>
+      <h1 className="text-2xl font-semibold">
+        Код підтвердження{" "}
+        <span role="img" aria-label="Емодзі ключа">
+          🔑
+        </span>
+      </h1>
       <p>
         SMS надіслано на{" "}
-        <span className="text-nowrap">
-          &quot;{formatPhoneNumberIntl(enteredPhoneNumber)}&quot;
+        <span aria-live="polite" className="text-nowrap">
+          &quot;<span className="sr-only">номер телефону:</span>{" "}
+          {formatPhoneNumberIntl(enteredPhoneNumber)}&quot;
         </span>
         .
       </p>

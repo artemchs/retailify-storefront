@@ -58,7 +58,10 @@ export default function SendOtpForm({ setStep, setPhoneNumber }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} aria-labelledby="form-title">
+        <h2 id="form-title" className="sr-only">
+          Форма для відправки коду підтвердження
+        </h2>
         <FormErrorAlert isError={isError} message={errorMsg} />
         <FormField
           control={form.control}

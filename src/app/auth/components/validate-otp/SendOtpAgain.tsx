@@ -36,7 +36,7 @@ export default function SendOtpAgain({ phoneNumber }: Props) {
   };
 
   return (
-    <>
+    <span aria-live="polite">
       Не отримали код?{" "}
       {timeLeft === 0 ? (
         <span
@@ -51,6 +51,6 @@ export default function SendOtpAgain({ phoneNumber }: Props) {
           знову.
         </span>
       )}
-    </>
+    </span>
   );
 }

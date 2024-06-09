@@ -24,6 +24,7 @@ export default function SubmitButton({
 
   return (
     <Button
+      aria-label="Надіслати форму"
       disabled={isPending}
       type="submit"
       className={cn(
