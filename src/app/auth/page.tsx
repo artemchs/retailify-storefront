@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Auth() {
   return (
-    <main className="container py-6 h-full flex-grow flex items-center justify-center">
+    <main className="container py-8 h-full flex-grow flex items-center justify-center">
       <AuthStepProvider>
         <AuthScreen
           headerComponentsArray={[

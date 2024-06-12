@@ -29,7 +29,7 @@ export const fetchConfig: RequestInit = {
   credentials: "include",
 };
 
-type MutationProps = {
+export type MutationProps = {
   onSuccess: (data?: any) => void;
   onError: (e: Error) => void;
 };

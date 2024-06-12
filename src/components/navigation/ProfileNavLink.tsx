@@ -8,7 +8,7 @@ export default async function ProfileNavLink() {
 
   return (
     <Button asChild size="icon" variant="ghost">
-      <Link href={at ? "/profile" : "/auth"}>
+      <Link href={at ? "/account" : "/auth"}>
         <User2 className="h-6 w-6 shrink-0" />
       </Link>
     </Button>
