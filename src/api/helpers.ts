@@ -1,25 +1,3 @@
-// type ResData = {
-//   error: string;
-//   message: string | string[];
-//   statusCode: number;
-// };
-
-// type Props = {
-//   setErrorMessage?: React.Dispatch<React.SetStateAction<string>>;
-// };
-
-// export default function onErrorHandler({ error, setErrorMessage }: Props) {
-//   const data = error.response?.data as ResData;
-//   if (setErrorMessage) {
-//     const message = data.message;
-//     if (Array.isArray(message)) {
-//       setErrorMessage(message[0]);
-//     } else if (typeof message === "string") {
-//       setErrorMessage(message);
-//     }
-//   }
-// }
-
 export const fetchConfig: RequestInit = {
   mode: "cors",
   headers: {
@@ -33,3 +11,45 @@ export type MutationProps = {
   onSuccess: (data?: any) => void;
   onError: (e: Error) => void;
 };
+
+type AuthFetchProps = {
+  url: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  body?: any;
+};
+
+export async function authFetch({ method, url, body }: AuthFetchProps) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${url}`, {
+    ...fetchConfig,
+    body: JSON.stringify(body),
+    method,
+  });
+
+  if (!res.ok) {
+    if (res.status === 401) {
+      const rtRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh-token`,
+        {
+          ...fetchConfig,
+          method: "POST",
+        }
+      );
+
+      if (!rtRes.ok) {
+        const rtErrorData = await res.json();
+        throw new Error(
+          rtErrorData.message ?? `Error ${res.status} - Something went wrong.`
+        );
+      }
+
+      return await res.json();
+    }
+
+    const errorData = await res.json();
+    throw new Error(
+      errorData.message ?? `Error ${res.status} - Something went wrong.`
+    );
+  }
+
+  return await res.json();
+}

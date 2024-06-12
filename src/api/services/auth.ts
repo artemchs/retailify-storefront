@@ -2,7 +2,7 @@ import { SendOtpFormSchemaType } from "@/form-validation/auth/send-otp";
 import { SignUpFormSchema } from "@/form-validation/auth/sign-up";
 import { ValidateOtpFormSchema } from "@/form-validation/auth/validate-otp";
 import { useMutation } from "@tanstack/react-query";
-import { MutationProps, fetchConfig } from "../helpers";
+import { MutationProps, authFetch, fetchConfig } from "../helpers";
 
 export const KEYS = {
   SEND_OTP: "send-otp",
@@ -79,7 +79,7 @@ export const useSignUp = ({ onSuccess, onError }: MutationProps) =>
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sign-up`,
         {
           ...fetchConfig,
-          method: "POST",
+          method: "",
           body: JSON.stringify(data),
         }
       );
@@ -100,23 +100,11 @@ export const useSignUp = ({ onSuccess, onError }: MutationProps) =>
 export const useSignOut = ({ onSuccess, onError }: MutationProps) =>
   useMutation({
     mutationKey: [KEYS.SIGN_OUT],
-    mutationFn: async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sign-out`,
-        {
-          ...fetchConfig,
-          method: "POST",
-        }
-      );
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(
-          errorData.message ?? `Error ${res.status} - Something went wrong.`
-        );
-      }
-
-      return await res.json();
+    mutationFn: () => {
+      return authFetch({
+        method: "POST",
+        url: "auth/sign-out",
+      });
     },
     onSuccess,
     onError,
