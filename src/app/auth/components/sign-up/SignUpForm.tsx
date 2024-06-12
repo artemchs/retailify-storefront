@@ -44,9 +44,10 @@ export default function SignUpForm({
   const { mutate, isPending, isError } = useSignUp({
     onSuccess: () => {
       router.push("/");
+      router.refresh();
       toast.success("Ви успішно ввійшли у свій профіль.");
     },
-    onError: (e) => {
+    onError: (e: any) => {
       setErrorMsg(e.message);
     },
   });

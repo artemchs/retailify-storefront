@@ -20,7 +20,7 @@ export default function AuthScreen({ headerComponentsArray }: Props) {
   } = useAuthStep();
 
   return (
-    <div className="w-screen max-w-screen-sm flex flex-col gap-12">
+    <div className="w-full max-w-sm flex flex-col gap-12">
       {headerComponentsArray[step - 1]}
       {step === 1 ? (
         <SendOtpForm setStep={setStep} setPhoneNumber={setEnteredPhoneNumber} />

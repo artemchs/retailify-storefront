@@ -20,6 +20,15 @@
 //   }
 // }
 
+export const fetchConfig: RequestInit = {
+  mode: "cors",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Credentials": "true",
+  },
+  credentials: "include",
+};
+
 type MutationProps = {
   onSuccess: (data?: any) => void;
   onError: (e: Error) => void;

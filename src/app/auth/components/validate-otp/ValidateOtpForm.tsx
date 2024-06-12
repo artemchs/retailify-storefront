@@ -53,16 +53,17 @@ export default function ValidateOtpForm({
 
   const [errorMsg, setErrorMsg] = useState("");
   const { mutate, isPending, isError } = useValidateOtp({
-    onSuccess: ({ firstTime }: { firstTime: boolean }) => {
+    onSuccess: async ({ firstTime }: { firstTime: boolean }) => {
       if (firstTime) {
         if (setStep) setStep(3);
         if (setValidatedOtp) setValidatedOtp(form.getValues("otp"));
       } else {
         router.push("/");
+        router.refresh();
         toast.success("Ви успішно ввійшли у свій профіль.");
       }
     },
-    onError: (e) => {
+    onError: (e: any) => {
       setErrorMsg(e.message);
     },
   });

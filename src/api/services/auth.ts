@@ -2,6 +2,7 @@ import { SendOtpFormSchemaType } from "@/form-validation/auth/send-otp";
 import { SignUpFormSchema } from "@/form-validation/auth/sign-up";
 import { ValidateOtpFormSchema } from "@/form-validation/auth/validate-otp";
 import { useMutation } from "@tanstack/react-query";
+import { fetchConfig } from "../helpers";
 
 export const KEYS = {
   SEND_OTP: "send-otp",
@@ -16,11 +17,9 @@ export const useSendOtp = ({ onSuccess, onError }: MutationProps) =>
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/send-otp`,
         {
+          ...fetchConfig,
           method: "POST",
           cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify(data),
         }
       );
@@ -49,11 +48,9 @@ export const useValidateOtp = ({ onSuccess, onError }: MutationProps) =>
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/validate-otp`,
         {
+          ...fetchConfig,
           method: "POST",
           cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify(data),
         }
       );
@@ -65,11 +62,9 @@ export const useValidateOtp = ({ onSuccess, onError }: MutationProps) =>
         );
       }
 
-      const resData = await res.json();
+      console.log(res.headers.getSetCookie());
 
-      return resData as {
-        firstTime: boolean;
-      };
+      return await res.json();
     },
     onSuccess,
     onError,
@@ -82,11 +77,8 @@ export const useSignUp = ({ onSuccess, onError }: MutationProps) =>
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sign-up`,
         {
+          ...fetchConfig,
           method: "POST",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify(data),
         }
       );
@@ -97,6 +89,8 @@ export const useSignUp = ({ onSuccess, onError }: MutationProps) =>
           errorData.message ?? `Error ${res.status} - Something went wrong.`
         );
       }
+
+      return await res.json();
     },
     onSuccess,
     onError,
