@@ -59,19 +59,19 @@
   }
 
   h1 {
-    @apply text-4xl font-extrabold tracking-tight lg:text-5xl;
+    @apply text-4xl font-extrabold tracking-tight lg:text-5xl text-pretty;
   }
 
   h2 {
-    @apply text-3xl font-semibold tracking-tight;
+    @apply text-3xl font-semibold tracking-tight text-pretty;
   }
 
   h3 {
-    @apply text-2xl font-semibold tracking-tight;
+    @apply text-2xl font-semibold tracking-tight text-pretty;
   }
 
   h4 {
-    @apply text-xl font-semibold tracking-tight;
+    @apply text-xl font-semibold tracking-tight text-pretty;
   }
 
   p {
@@ -138,5 +138,9 @@
 
   .typography-muted {
     @apply text-sm text-muted-foreground;
+  }
+
+  .input-size {
+    @apply flex h-10 w-full rounded-md;
   }
 }

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
-import SignOutCard from "./components/SignOutCard";
+import SignOutCard from "./components/sign-out/SignOutCard";
 import { redirect } from "next/navigation";
+import EditProfile from "./components/edit-profile/EditProfile";
 
 export default async function Account() {
   const rt = cookies().get("storefront-jwt-refresh-token");
@@ -15,6 +16,7 @@ export default async function Account() {
           акаунтом.
         </p>
       </header>
+      <EditProfile />
       <SignOutCard />
     </main>
   );

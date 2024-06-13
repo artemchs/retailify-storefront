@@ -4,7 +4,6 @@ import { sendOtpFormSchema } from "@/form-validation/auth/send-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ControllerRenderProps, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import ua from "react-phone-number-input/locale/ua";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Key } from "lucide-react";
 import { useSendOtp } from "@/api/services/auth";
@@ -22,6 +20,7 @@ import SubmitButton from "@/components/ui/submit-button";
 import FormErrorAlert from "@/components/ui/form-error-alert";
 import { useState } from "react";
 import { toast } from "sonner";
+import CustomizedPhoneNumberInput from "@/components/ui/customized-phone-number-input";
 
 type Props = {
   setStep?: (newValue: number) => void;
@@ -75,7 +74,7 @@ export default function SendOtpForm({ setStep, setPhoneNumber }: Props) {
                 </span>
               </FormLabel>
               <FormControl>
-                <PhoneNumberInput field={field} />
+                <CustomizedPhoneNumberInput field={field} />
               </FormControl>
               <FormDescription>
                 На цей номер телефону ми надішлемо SMS із 6-значним кодом.
@@ -87,28 +86,5 @@ export default function SendOtpForm({ setStep, setPhoneNumber }: Props) {
         <SubmitButton Icon={Key} isPending={isPending} text="Надіслати код" />
       </form>
     </Form>
-  );
-}
-
-function PhoneNumberInput({
-  field,
-}: {
-  field: ControllerRenderProps<
-    {
-      phoneNumber: string;
-    },
-    "phoneNumber"
-  >;
-}) {
-  return (
-    <PhoneInput
-      {...field}
-      id="phoneNumber"
-      labels={ua}
-      countries={["UA"]}
-      defaultCountry="UA"
-      placeholder="000 000 0000"
-      international={false}
-    />
   );
 }

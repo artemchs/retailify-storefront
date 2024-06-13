@@ -8,6 +8,7 @@ type Props = {
   Icon: any; // What type do I put here?
   text: string;
   isPending: boolean;
+  marginTop?: boolean;
   variant?: "default" | "destructive";
 };
 
@@ -17,6 +18,7 @@ export default function SubmitButton({
   isPending,
   text,
   variant = "default",
+  marginTop = true,
 }: Props) {
   const icon = isPending ? (
     <Loader className="h-4 w-4 shrink-0 animate-spin" />
@@ -31,7 +33,8 @@ export default function SubmitButton({
       type="submit"
       variant={variant}
       className={cn(
-        "w-full mt-4 flex items-center justify-center gap-2",
+        "w-full flex items-center justify-center gap-2",
+        marginTop && "mt-4",
         className
       )}
     >

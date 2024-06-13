@@ -51,5 +51,7 @@ export async function authFetch({ method, url, body }: AuthFetchProps) {
     );
   }
 
-  return await res.json();
+  const data = await res.json();
+
+  return data;
 }

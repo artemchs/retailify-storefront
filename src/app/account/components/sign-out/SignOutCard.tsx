@@ -39,7 +39,9 @@ export default function SignOutCard() {
         <Button
           onClick={() => mutate()}
           variant="destructive"
+          type="button"
           disabled={isPending}
+          className="w-full lg:w-fit"
         >
           {isPending ? (
             <LoaderIcon className="h-4 w-4 mr-2 animate-spin" />
