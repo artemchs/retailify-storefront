@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button, ButtonProps } from "./button";
 import { ClassNameValue } from "tailwind-merge";
 import { Loader } from "lucide-react";
 
@@ -10,6 +10,7 @@ type Props = {
   isPending: boolean;
   marginTop?: boolean;
   variant?: "default" | "destructive";
+  formId?: string;
 };
 
 export default function SubmitButton({
@@ -19,6 +20,7 @@ export default function SubmitButton({
   text,
   variant = "default",
   marginTop = true,
+  formId,
 }: Props) {
   const icon = isPending ? (
     <Loader className="h-4 w-4 shrink-0 animate-spin" />
@@ -33,10 +35,11 @@ export default function SubmitButton({
       type="submit"
       variant={variant}
       className={cn(
-        "w-full flex items-center justify-center gap-2",
+        "w-full lg:w-fit flex items-center justify-center gap-2",
         marginTop && "mt-4",
         className
       )}
+      form={formId}
     >
       {icon}
       {text}

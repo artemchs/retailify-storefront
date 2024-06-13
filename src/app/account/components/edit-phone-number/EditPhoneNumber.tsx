@@ -8,25 +8,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import EditProfileForm from "./EditProfileForm";
+import EditPhoneNumberForm from "./EditPhoneNumberForm";
 
-export default function EditProfile() {
+export default function EditPhoneNumber() {
   const { data, isLoading, isError, error } = useGetMe();
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Мій профіль</CardTitle>
+        <CardTitle>Номер телефону</CardTitle>
         <CardDescription>
-          Тут ви можете редагувати інформацію про свій профіль.
+          Тут ви можете змінити номер телефону, прив&apos;язаний до вашого
+          облікового запису.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <EditProfileForm
+        <EditPhoneNumberForm
           data={data}
+          error={error}
           isError={isError}
           isLoading={isLoading}
-          error={error}
         />
       </CardContent>
     </Card>

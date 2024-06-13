@@ -63,8 +63,6 @@ export const useValidateOtp = ({ onSuccess, onError }: MutationProps) =>
         );
       }
 
-      console.log(res.headers.getSetCookie());
-
       return await res.json();
     },
     onSuccess,

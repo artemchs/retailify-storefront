@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "navigation",
-        "auth"
+        "auth",
+        "profile"
     ]
 }

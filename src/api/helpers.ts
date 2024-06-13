@@ -16,9 +16,15 @@ type AuthFetchProps = {
   url: string;
   method: "GET" | "POST" | "PUT" | "DELETE";
   body?: any;
+  isSMS?: boolean;
 };
 
-export async function authFetch({ method, url, body }: AuthFetchProps) {
+export async function authFetch({
+  method,
+  url,
+  body,
+  isSMS = false,
+}: AuthFetchProps) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${url}`, {
     ...fetchConfig,
     body: JSON.stringify(body),
@@ -43,6 +49,12 @@ export async function authFetch({ method, url, body }: AuthFetchProps) {
       }
 
       return await res.json();
+    }
+
+    if (res.status === 429 && isSMS) {
+      throw new Error(
+        "Ви надіслали забагато SMS-повідомлень. Зачекайте ще одну хвилину, перш ніж надсилати наступне SMS."
+      );
     }
 
     const errorData = await res.json();
